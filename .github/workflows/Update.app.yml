@@ -41,7 +41,7 @@ jobs:
         git clone https://github.com/kiddin9/kwrt-packages.git ./tmp
         mv ./tmp/* ./
         rm -rf ./tmp
-        
+        rm -rf ./README.md
         
         
         

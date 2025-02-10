@@ -42,7 +42,7 @@ jobs:
         mv ./tmp/* ./
         rm -rf ./tmp
         rm -rf ./README.md
-        
+        rm -rf ./LICENSE
         
         
     - name: Apply

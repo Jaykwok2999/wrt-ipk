@@ -1,0 +1,21 @@
+#!/bin/sh
+[ ! -f "/usr/share/ucitrack/luci-app-turboacc.json" ] && {
+    cat > /usr/share/ucitrack/luci-app-turboacc.json << EEOF
+{
+    "config": "turboacc",
+    "init": "turboacc"
+}
+EEOF
+/etc/init.d/ucitrack reload
+}
+
+uci -q batch <<-EOF >/dev/null
+EOF
+
+[ -n "$(lsmod | grep mtkhnat)" ] && \
+	uci set turboacc.config.sw_flow='0' && \
+	uci set turboacc.config.hw_flow='0'
+
+uci commit turboacc
+
+exit 0

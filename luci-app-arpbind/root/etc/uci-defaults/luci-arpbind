@@ -1,0 +1,17 @@
+#!/bin/sh
+[ ! -f "/usr/share/ucitrack/luci-app-arpbind.json" ] && {
+    cat > /usr/share/ucitrack/luci-app-arpbind.json << EEOF
+{
+    "config": "arpbind",
+    "init": "arpbind"
+}
+EEOF
+/etc/init.d/ucitrack reload
+}
+touch /etc/config/arpbind
+
+uci -q batch <<-EOF >/dev/null
+EOF
+
+rm -f /tmp/luci-indexcache
+exit 0

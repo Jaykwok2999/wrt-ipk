@@ -1,0 +1,18 @@
+#!/bin/sh
+[ ! -f "/usr/share/ucitrack/luci-app-fullconenat.json" ] && {
+    cat > /usr/share/ucitrack/luci-app-fullconenat.json << EEOF
+{
+    "config": "fullconenat",
+    "init": "fullconenat"
+}
+EEOF
+/etc/init.d/ucitrack reload
+}
+
+uci -q batch <<-EOF >/dev/null
+EOF
+
+/etc/init.d/fullconenat enable
+
+rm -f /tmp/luci-indexcache
+exit 0

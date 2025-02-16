@@ -1,0 +1,22 @@
+#!/bin/sh
+[ ! -f "/usr/share/ucitrack/luci-app-pppoe-user.json" ] && {
+    cat > /usr/share/ucitrack/luci-app-pppoe-user.json << EEOF
+{
+    "config": "pppoe-user",
+    "init": "pppoe-user"
+}
+EEOF
+/etc/init.d/ucitrack reload
+}
+
+uci -q batch <<-EOF >/dev/null
+EOF
+
+chmod 600 /etc/config/pppoe-user
+chmod 755 /etc/init.d/pppoe-user
+chmod 755 /etc/ppp/ip-up /etc/ppp/ip-down
+chmod 755 /etc/ppp/auth-up /etc/ppp/auth-down
+chmod +x /etc/ppp/ip-up.d/* /etc/ppp/ip-down.d/*
+
+rm -rf /tmp/luci-*cache
+exit 0

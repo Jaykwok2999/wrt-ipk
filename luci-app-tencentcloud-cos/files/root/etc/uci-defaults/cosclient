@@ -1,0 +1,16 @@
+#!/bin/sh
+[ ! -f "/usr/share/ucitrack/luci-app-cosclient.json" ] && {
+    cat > /usr/share/ucitrack/luci-app-cosclient.json << EEOF
+{
+    "config": "cosclient",
+    "init": "cosclient"
+}
+EEOF
+/etc/init.d/ucitrack reload
+}
+
+uci -q batch <<-EOF >/dev/null
+EOF
+
+rm -f /tmp/luci-indexcache
+exit 0

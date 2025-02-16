@@ -1,0 +1,18 @@
+#!/bin/sh
+[ ! -f "/usr/share/ucitrack/luci-app-cqustdotnet.json" ] && {
+    cat > /usr/share/ucitrack/luci-app-cqustdotnet.json << EEOF
+{
+    "config": "cqustdotnet",
+    "init": "cqustdotnet"
+}
+EEOF
+/etc/init.d/ucitrack reload
+}
+
+uci -q batch <<-EOF >/dev/null
+EOF
+
+[ ! -s '/etc/config/cqustdotnet' ] && cp -f /usr/share/cqustdotnet/0_default_config /etc/config/cqustdotnet
+rm -f /tmp/luci-indexcache
+rm -rf /tmp/luci-modulecache/
+exit 0

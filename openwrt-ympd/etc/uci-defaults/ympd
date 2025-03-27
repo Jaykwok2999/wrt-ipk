@@ -1,0 +1,19 @@
+#!/bin/sh
+[ ! -f "/usr/share/ucitrack/luci-app-ympd.json" ] && {
+    cat > /usr/share/ucitrack/luci-app-ympd.json << EEOF
+{
+    "config": "ympd",
+    "init": "ympd"
+}
+EEOF
+/etc/init.d/ucitrack reload
+}
+
+uci -q batch <<-EOF >/dev/null
+        delete ucitrack.@ympd[-1]
+        add ucitrack ympd
+        set ucitrack.@ympd[-1].init=ympd
+        commit ucitrack
+EOF
+
+exit 0

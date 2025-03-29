@@ -1,0 +1,20 @@
+#!/bin/sh
+[ ! -f "/usr/share/ucitrack/luci-app-xunyou.json" ] && {
+    cat > /usr/share/ucitrack/luci-app-xunyou.json << EEOF
+{
+    "config": "xunyou",
+    "init": "xunyou"
+}
+EEOF
+/etc/init.d/ucitrack reload
+}
+
+uci -q batch <<-EOF >/dev/null
+	delete ucitrack.@xunyou[-1]
+	add ucitrack xunyou
+	set ucitrack.@xunyou[-1].init=xunyou
+	commit ucitrack
+EOF
+
+
+exit 0
